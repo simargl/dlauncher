@@ -27,4 +27,4 @@ For using in labwc add following to .config/labwc/rc.xml
         <action name="MoveToEdge" direction="left" snapWindows="no" />
       </windowRule>
   </windowRules>
-.```
+```
