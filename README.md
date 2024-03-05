@@ -15,3 +15,16 @@ Install dlauncher with:
   apt install libfltk1.3-dev -y
   g++ `fltk-config --use-images --cxxflags` dlauncher.cxx `fltk-config --use-images --ldflags` -o dlauncher; ./dlauncher
 ```
+
+## Note
+
+For using in labwc add following to .config/labwc/rc.xml
+
+```xml
+  <windowRules>
+      <windowRule title="*dlauncher*">
+        <action name="MoveToEdge" direction="down" snapWindows="no" />
+        <action name="MoveToEdge" direction="left" snapWindows="no" />
+      </windowRule>
+  </windowRules>
+.```
