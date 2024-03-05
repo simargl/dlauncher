@@ -9,7 +9,7 @@ buttons with hover effect
 
 ## Installation
 
-Install wmlogout with:
+Install dlauncher with:
 
 ```bash
   apt install libfltk1.3-dev -y
