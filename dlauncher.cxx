@@ -19,7 +19,7 @@ Fl_Button *button;
 bool hasFocus = true;
 Fl_Color bcolor = 0x2d2d2d00;
 Fl_Color fcolor = 0x15539e00;
-std::string icons_dir = "/usr/share/icons/hicolor/48x48/apps";
+std::string icons_dir = "/usr/share/icons/hicolor/48x48/apps/";
 
 struct DesktopFile {
     std::string name;
@@ -76,7 +76,7 @@ void parseDesktopFile(const std::filesystem::path& filePath, std::vector<Desktop
             }
         }
         if (iconPath == "") {
-            std::cout<<"not found icon for: "<<desktopFile.icon.c_str()<<std::endl;
+            std::cout<<"not found icon: "<<icons_dir+desktopFile.icon.c_str()<<std::endl;
         }
         if (!iconPath.empty()) {
             desktopFile.icon = iconPath.string();
