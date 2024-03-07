@@ -76,7 +76,7 @@ void parseDesktopFile(const std::filesystem::path& filePath, std::vector<Desktop
             }
         }
         if (iconPath == "") {
-            std::cout<<"not found icon for: " << desktopFile.icon.c_str()<<std::endl;
+            std::cout<<"not found icon for: "<<desktopFile.icon.c_str()<<std::endl;
         }
         if (!iconPath.empty()) {
             desktopFile.icon = iconPath.string();
