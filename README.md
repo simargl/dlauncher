@@ -1,7 +1,9 @@
 # dlauncher
 Application launcher made in c++ and fltk with colors matching adwaita dark theme
 
-icon search path by default is /usr/share/icons/hicolor/48x48/apps
+icon search path by default is /usr/share/icons/hicolor/48x48/apps/
+
+configuration file is $HOME/.config/dlauncher/config
 
 buttons with hover effect
 
