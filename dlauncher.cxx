@@ -19,13 +19,60 @@ Fl_Button *button;
 bool hasFocus = true;
 Fl_Color bcolor = 0x2d2d2d00;
 Fl_Color fcolor = 0x15539e00;
-std::string icons_dir = "/usr/share/icons/hicolor/48x48/apps/";
+std::string icons_dir;
 
 struct DesktopFile {
     std::string name;
     std::string exec;
     std::string icon;
 };
+
+void createConfigDirAndFile(const std::string& configFile) {
+    std::string configDir = configFile.substr(0, configFile.find_last_of('/'));
+    // Create .config/dlauncher directory if it doesn't exist
+    if (!std::filesystem::exists(configDir)) {
+        if (mkdir(configDir.c_str(), 0700) != 0) {
+            std::cerr << "Failed to create directory: " << configDir << std::endl;
+            return;
+        }
+    }
+    std::ofstream file(configFile);
+    if (file.is_open()) {
+        // Write default configuration
+        file << "icons_dir = /usr/share/icons/hicolor/48x48/apps/" << std::endl;
+        file.close();
+    } else {
+        std::cerr << "Failed to create config file: " << configFile << std::endl;
+    }
+}
+
+void readConfigFile() {
+    const char* homeDir = getenv("HOME");
+    if (homeDir != nullptr) {
+        std::string configFile = std::string(homeDir) + "/.config/dlauncher/config";
+        std::ifstream file(configFile);
+        if (file.is_open()) {
+            std::string line;
+            while (std::getline(file, line)) {
+                if (line.find("icons_dir") != std::string::npos) {
+                    auto pos = line.find("=");
+                    if (pos != std::string::npos) {
+                        icons_dir = line.substr(pos + 1);
+                        // Remove leading/trailing whitespaces
+                        icons_dir.erase(0, icons_dir.find_first_not_of(" \t"));
+                        icons_dir.erase(icons_dir.find_last_not_of(" \t") + 1);
+                    }
+                }
+            }
+            file.close();
+        } else {
+            // Config file doesn't exist, create it
+            createConfigDirAndFile(configFile);
+            // Use default icons_dir
+            icons_dir = "/usr/share/icons/hicolor/48x48/apps/";
+        }
+    }
+}
 
 void parseDesktopFile(const std::filesystem::path& filePath, std::vector<DesktopFile>& desktopFiles) {
     std::ifstream file(filePath);
@@ -130,6 +177,7 @@ void check_if_focus_was_lost(void*) {
 }
 
 int main(int argc, char **argv) {
+    readConfigFile();
     std::vector<DesktopFile> parsedFiles = parseDesktopFiles("/usr/share/applications");
     window = new Fl_Window(520, 500, "dlauncher");
     window->color(bcolor);
