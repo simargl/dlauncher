@@ -124,6 +124,7 @@ void parseDesktopFile(const std::filesystem::path& filePath, std::vector<Desktop
         }
         if (iconPath == "") {
             std::cout<<"not found icon: "<<icons_dir+desktopFile.icon.c_str()<<std::endl;
+            iconPath = "/usr/share/icons/hicolor/48x48/apps/application-x-generic.png";
         }
         if (!iconPath.empty()) {
             desktopFile.icon = iconPath.string();
