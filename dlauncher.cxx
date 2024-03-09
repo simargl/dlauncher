@@ -93,7 +93,10 @@ void parseDesktopFile(const std::filesystem::path& filePath, std::vector<Desktop
         if (!nameFound && line.find("Name=") != std::string::npos) {
             desktopFile.name = line.substr(5); // Skip "Name="
             nameFound = true;
-        } else if (!execFound && line.find("Exec=") != std::string::npos) {
+        } else if (line.find("TryExec=") != std::string::npos) {
+            // Ignore TryExec line
+            continue;
+        } else if (line.find("Exec=") != std::string::npos) {
             // Skip placeholders like %U, %f, etc., and append ' &' to the exec field
             std::string execLine = line.substr(5); // Skip "Exec="
             size_t pos = execLine.find_first_of("%");
@@ -165,6 +168,7 @@ class Fl_HoverButton : public Fl_Button {
 };
 
 void buttonCallback(Fl_Widget* widget, void* command) {
+    std::cout<<"executing command: "<<static_cast<const char*>(command)<<std::endl;
     system(static_cast<const char*>(command));
     exit(0);
 }
