@@ -15,7 +15,7 @@ Install dlauncher with:
 
 ```bash
   apt install libfltk1.3-dev -y
-  g++ `fltk-config --use-images --cxxflags` dlauncher.cxx `fltk-config --use-images --ldflags` -o dlauncher; ./dlauncher
+  make; ./dlauncher
 ```
 
 ## Note
