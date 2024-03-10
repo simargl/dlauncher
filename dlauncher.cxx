@@ -73,7 +73,6 @@ void readConfigFile() {
         }
     }
 }
-
 void parseDesktopFile(const std::filesystem::path& filePath, std::vector<DesktopFile>& desktopFiles) {
     std::ifstream file(filePath);
     if (!file.is_open()) {
@@ -93,10 +92,7 @@ void parseDesktopFile(const std::filesystem::path& filePath, std::vector<Desktop
         if (!nameFound && line.find("Name=") != std::string::npos) {
             desktopFile.name = line.substr(5); // Skip "Name="
             nameFound = true;
-        } else if (line.find("TryExec=") != std::string::npos) {
-            // Ignore TryExec line
-            continue;
-        } else if (line.find("Exec=") != std::string::npos) {
+        } else if (!execFound && line.find("Exec=") != std::string::npos) {
             // Skip placeholders like %U, %f, etc., and append ' &' to the exec field
             std::string execLine = line.substr(5); // Skip "Exec="
             size_t pos = execLine.find_first_of("%");
@@ -139,6 +135,7 @@ void parseDesktopFile(const std::filesystem::path& filePath, std::vector<Desktop
         desktopFiles.push_back(desktopFile);
     }
 }
+
 
 std::vector<DesktopFile> parseDesktopFiles(const std::string& directory) {
     std::vector<DesktopFile> desktopFiles;
