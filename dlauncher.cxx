@@ -181,11 +181,11 @@ void check_if_focus_was_lost(void*) {
 int main(int argc, char **argv) {
     readConfigFile();
     std::vector<DesktopFile> parsedFiles = parseDesktopFiles("/usr/share/applications");
-    window = new Fl_Window(520, 500, "dlauncher");
+    window = new Fl_Window(500, 500, "dlauncher");
     window->color(bcolor);
     window->clear_border();
-    Fl_Scroll scroll(0, 0, 520, 500);
-    scroll.color(bcolor);
+    Fl_Scroll scroll(0, 0, 495, 500);
+    scroll.scrollbar.color(bcolor, FL_LIGHT1);
     int y = 0;
     int x = 0;
     for (const auto& file : parsedFiles) {
