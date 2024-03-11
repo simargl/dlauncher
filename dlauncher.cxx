@@ -185,6 +185,7 @@ int main(int argc, char **argv) {
     window->color(bcolor);
     window->clear_border();
     Fl_Scroll scroll(0, 0, 495, 500);
+    scroll.color(bcolor);
     scroll.scrollbar.color(bcolor, FL_LIGHT1);
     int y = 0;
     int x = 0;
