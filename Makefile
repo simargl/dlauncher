@@ -8,7 +8,7 @@ FLTK_CXXFLAGS := $(shell fltk-config --use-images --cxxflags)
 FLTK_LDFLAGS := $(shell fltk-config --use-images --ldflags)
 
 # Source files
-SOURCES := dlauncher.cxx
+SOURCES := image_loader.cxx main.cxx
 
 # Object files
 OBJECTS := $(SOURCES:.cxx=.o)
