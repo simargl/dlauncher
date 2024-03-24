@@ -165,7 +165,10 @@ class Fl_HoverButton : public Fl_Button {
 
 void buttonCallback(Fl_Widget* widget, void* command) {
     std::cout<<"executing command: "<<static_cast<const char*>(command)<<std::endl;
-    system(static_cast<const char*>(command));
+    int result = std::system(static_cast<const char*>(command));
+    if (result == -1) {
+        std::cerr << "Failed to execute command: " << command << std::endl;
+    }
     exit(0);
 }
 
