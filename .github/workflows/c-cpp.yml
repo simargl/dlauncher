@@ -22,7 +22,7 @@ jobs:
         mkdir release
         cp dlauncher release/dlauncher
     - name: Publish Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: web-release
         path: release
