@@ -8,10 +8,10 @@ FLTK_CXXFLAGS := $(shell fltk-config --use-images --cxxflags)
 FLTK_LDFLAGS := $(shell fltk-config --use-images --ldflags)
 
 # Source files
-SOURCES := image_loader.cxx main.cxx
+SOURCES := image_loader.cpp main.cpp
 
 # Object files
-OBJECTS := $(SOURCES:.cxx=.o)
+OBJECTS := $(SOURCES:.cpp=.o)
 
 # Executable
 EXECUTABLE := dlauncher
