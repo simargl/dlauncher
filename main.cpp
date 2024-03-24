@@ -4,7 +4,6 @@
 
 // g++ `fltk-config --use-images --cxxflags` main.cpp image_loader.cpp `fltk-config --use-images --ldflags` -o dlauncher; ./dlauncher
 
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,6 +14,7 @@
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Scroll.H>
 #include "image_loader.hpp"
+#include "main.hpp"
 
 Fl_Window *window;
 Fl_Button *button;
@@ -22,10 +22,6 @@ bool hasFocus = true;
 Fl_Color bcolor = 0x2d2d2d00;
 Fl_Color fcolor = 0x15539e00;
 std::string icons_dir;
-
-struct DesktopFile {
-    std::string name, exec, icon;
-};
 
 void createConfigDirAndFile(const std::string& configFile) {
     std::string configDir = configFile.substr(0, configFile.find_last_of('/'));
