@@ -136,6 +136,7 @@ int main(int argc, char **argv) {
     window = new Fl_Window(520, 500, "dlauncher");
     window->color(bcolor);
     window->clear_border();
+    window->position(0, Fl::h() - window->h());
     Fl_Scroll scroll(0, 0, 515, 500);
     scroll.color(bcolor);
     scroll.scrollbar.color(bcolor, FL_LIGHT1);
