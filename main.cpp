@@ -19,8 +19,8 @@
 Fl_Window *window;
 Fl_Button *button;
 bool hasFocus = true;
-Fl_Color bcolor = 0x35353500;
-Fl_Color fcolor = 0x2d2d2d00;
+Fl_Color bcolor = 0x1f1f1f00;
+Fl_Color fcolor = 0x36363500;
 std::string icons_dir;
 
 void createConfigDirAndFile(const std::string& configFile) {
