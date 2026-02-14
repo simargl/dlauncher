@@ -1,32 +1,33 @@
+# Makefile for dlauncher
+
 # Compiler
-CXX := g++
+CC = gcc
 
-# FLTK compiler flags
-FLTK_CXXFLAGS := $(shell fltk-config --use-images --cxxflags)
+# Compiler flags
+CFLAGS = -Wall -Wextra `pkg-config --cflags --libs gtk+-3.0`
 
-# FLTK linker flags
-FLTK_LDFLAGS := $(shell fltk-config --use-images --ldflags)
+# Executable name
+TARGET = dlauncher
 
 # Source files
-SOURCES := image_loader.cpp main.cpp
+SRCS = dlauncher.c
 
 # Object files
-OBJECTS := $(SOURCES:.cpp=.o)
+OBJS = $(SRCS:.c=.o)
 
-# Executable
-EXECUTABLE := dlauncher
+# Default target
+all: $(TARGET)
+
+# Build the executable
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $(OBJS) $(CFLAGS)
+
+# Compile source files into object files
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+# Clean up build artifacts
+clean:
+	rm -f $(OBJS) $(TARGET)
 
 .PHONY: all clean
-
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(FLTK_LDFLAGS) -o $@
-	strip $@
-	rm -f $(OBJECTS)
-
-%.o: %.cxx
-	$(CXX) $(FLTK_CXXFLAGS) -c $< -o $@
-
-clean:
-	rm -f $(EXECUTABLE) $(OBJECTS)
